@@ -1,0 +1,1 @@
+Application to read and solve Sudokus and verify solutions.
