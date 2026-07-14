@@ -1,12 +1,13 @@
 import sys
 import numpy as np
-from Sudoku import Sudoku
+from sudoku import Sudoku
+import checker
 
 def main():
-    testGrid = np.arange(81).reshape(9,9)
+    testGrid = np.random.randint(1,9,(9,9))
     sud = Sudoku(testGrid)
-    print(testGrid)
-    print(str(sud))
+    print(sud)
+    checker.check_state(sud)
 
 if __name__ == '__main__':
     sys.exit(main())

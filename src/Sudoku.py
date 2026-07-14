@@ -12,12 +12,18 @@ class Sudoku:
             raise ValueError(f"9x9 grid was expected, but {shape} dimensions were provided, when creating the Sudoku.")
         self.grid = grid
         return
+    
+    def getGrid(self):
+        return self.grid
         
     def getRow(self, row):
         return self.grid[row, :]
 
     def getColumn(self, col):
         return self.grid[:, col]
+    
+    def getBlockNumber(self, row, col):
+        return (int(row/3)*3 + int(col//3))
 
     def getBlock(self, block):
         """Returns block section of the grid as numpy array. The blocks are numbered from 0 to 8 as follows:\n
