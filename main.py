@@ -1,7 +1,7 @@
 import sys
 import numpy as np
-from sudoku import Sudoku
-import checker
+from sudoku.sudoku import Sudoku
+import sudoku.checker as checker
 
 def main():
     testGrid = np.random.randint(1,9,(9,9))

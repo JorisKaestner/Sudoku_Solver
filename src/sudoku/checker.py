@@ -1,4 +1,4 @@
-from sudoku import Sudoku
+from sudoku.sudoku import Sudoku
 
 def check_state(state, final=False):
     """Returns true, if there are no duplicate digits in rows, coloumns or blocks
