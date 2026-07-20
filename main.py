@@ -4,10 +4,8 @@ from sudoku.sudoku import Sudoku
 import sudoku.checker as checker
 
 def main():
-    testGrid = np.random.randint(1,9,(9,9))
-    sud = Sudoku(testGrid)
-    print(sud)
-    checker.check_state(sud)
+    sud = Sudoku([[0] * 9 for _ in range(9)])
+    print(sud.isEmpty())
 
 if __name__ == '__main__':
     sys.exit(main())

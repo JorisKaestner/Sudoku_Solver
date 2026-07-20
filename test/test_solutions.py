@@ -6,4 +6,5 @@ from dummy_sudokus import (
 )
 
 def test_unsolvable_empty():
-    assert solve_sudoku(EMPTY_BOARD).isEmpty() is True
+    solution = solve_sudoku(EMPTY_BOARD)
+    assert solution.isEmpty() is True
