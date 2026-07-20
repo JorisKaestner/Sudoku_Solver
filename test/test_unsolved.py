@@ -9,16 +9,16 @@ from dummy_sudokus import (
 )
 
 def test_valid_unsolved():
-    assert check_state(VALID_UNSOLVED, False) is True
+    assert check_state(VALID_UNSOLVED, False)
 
 def test_invalid_row_unsolved():
-    assert check_state(INVALID_ROW, False) is False
+    assert not check_state(INVALID_ROW, False)
 
 def test_invalid_col_unsolved():
-    assert check_state(INVALID_COLUMN) is False
+    assert not check_state(INVALID_COLUMN)
 
 def test_invalid_box_unsolved():
-    assert check_state(INVALID_BOX) is False
+    assert not check_state(INVALID_BOX)
 
 def test_empty_board():
-    assert check_state(EMPTY_BOARD) is True
+    assert check_state(EMPTY_BOARD)
