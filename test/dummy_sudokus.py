@@ -54,7 +54,7 @@ INVALID_BOX = Sudoku([
 ])
 
 # valid solution
-SOLVED_VALID_1 = [
+SOLVED_VALID_1 = Sudoku([
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -64,10 +64,10 @@ SOLVED_VALID_1 = [
     [9, 6, 1, 5, 3, 7, 2, 8, 4],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [3, 4, 5, 2, 8, 6, 1, 7, 9],
-]
+])
 
 # valid solution
-SOLVED_VALID_2 = [
+SOLVED_VALID_2 = Sudoku([
     [6, 4, 5, 7, 8, 9, 1, 2, 3],
     [7, 8, 3, 2, 1, 6, 4, 5, 9],
     [2, 1, 9, 4, 5, 3, 6, 7, 8],
@@ -77,10 +77,10 @@ SOLVED_VALID_2 = [
     [1, 7, 2, 6, 4, 8, 3, 9, 5],
     [3, 9, 8, 5, 2, 1, 7, 4, 6],
     [4, 5, 6, 3, 9, 7, 2, 8, 1],
-]
+])
 
 # duplicate 5 in row 0
-SOLVED_INVALID_ROW = [
+SOLVED_INVALID_ROW = Sudoku([
     [5, 3, 4, 6, 7, 8, 9, 1, 5],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -90,10 +90,10 @@ SOLVED_INVALID_ROW = [
     [9, 6, 1, 5, 3, 7, 2, 8, 4],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [3, 4, 5, 2, 8, 6, 1, 7, 9],
-]
+])
 
 # duplicate 5 in column 0
-SOLVED_INVALID_COLUMN = [
+SOLVED_INVALID_COLUMN = Sudoku([
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -103,10 +103,10 @@ SOLVED_INVALID_COLUMN = [
     [9, 6, 1, 5, 3, 7, 2, 8, 4],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [5, 4, 5, 2, 8, 6, 1, 7, 9],
-]
+])
 
 # duplicate 5 in top-left block
-SOLVED_INVALID_BOX = [
+SOLVED_INVALID_BOX = Sudoku([
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 5, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -116,6 +116,6 @@ SOLVED_INVALID_BOX = [
     [9, 6, 1, 5, 3, 7, 2, 8, 4],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [3, 4, 5, 2, 8, 6, 1, 7, 9],
-]
+])
 
 EMPTY_BOARD = Sudoku([[0] * 9 for _ in range(9)])
