@@ -38,6 +38,9 @@ class Sudoku:
         y = int(block/3)*3
         print(y)
         return self.grid[y:y+3,x:x+3]
+    
+    def isEmpty(self):
+        return (np.count_nonzero(self.grid) == 0)
 
     def __str__(self):
         """Returns Sudoku as formatted table. 0 and empty cells get represented as a dot."""
