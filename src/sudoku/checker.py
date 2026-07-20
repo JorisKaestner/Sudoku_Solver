@@ -1,8 +1,23 @@
 from sudoku.sudoku import Sudoku
 
-def check_state(state, final=False):
+def check_placement(sdk: Sudoku, value: int, row: int, col: int):
+    """Checks if single value can be placed at specified location.
+    
+        TODO: optimize runtime
+    """
+    if not (sdk.getGrid[row][col] == 0):
+        return False
+    if value in sdk.getRow(row):
+        return False
+    if value in sdk.getColumn(col):
+        return False
+    if value in sdk.getBlock(sdk.getBlockNumber(row, col)):
+        return False
+    return True
+
+def check_state(sdk: Sudoku, final=False):
     """Returns true, if there are no duplicate digits in rows, coloumns or blocks
-    in the current state and false otherwise.
+    in the current sdk and false otherwise.
     Returns false, if the solution is final and has empty cells.
     DOES NOT CHECK FOR SOLVABILITY."""
 
@@ -10,7 +25,7 @@ def check_state(state, final=False):
     cols = [[0] * 10 for _ in range(10)]
     blocks = [[0] * 10 for _ in range(10)]
 
-    grid = state.getGrid()
+    grid = sdk.getGrid()
     for row in range(len(grid)):
         for col in range(len(grid[0])):
             # skip empty cells or return false if final
@@ -39,7 +54,7 @@ def check_state(state, final=False):
                     return False
                 
                 # check blocks for duplicates
-                blockNumber = state.getBlockNumber(row, col)
+                blockNumber = sdk.getBlockNumber(row, col)
                 if blocks[blockNumber][digit] == 0:
                     blocks[blockNumber][digit] = 1
                 else:
