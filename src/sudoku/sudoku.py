@@ -1,48 +1,56 @@
 import numpy as np
 class Sudoku:
     def __init__(self, grid):
+        # convert grid to np array if possible
         try:
             inputType = str(type(grid))
             grid = np.asarray(grid)
         except:
             raise TypeError(f"Array-like type was expected, but {inputType} was provided, when creating the Sudoku.")
         
+        # check grid shape
         if grid.shape != (9,9):
             shape = str(grid.shape)
             raise ValueError(f"9x9 grid was expected, but {shape} dimensions were provided, when creating the Sudoku.")
         self.grid = grid
         return
     
-    def getGrid(self):
+    def getGrid(self) -> np.array:
         return self.grid
         
-    def getRow(self, row):
+    def getRow(self, row: int) -> np.array:
         return self.grid[row, :]
 
-    def getColumn(self, col):
+    def getColumn(self, col: int) -> np.array:
         return self.grid[:, col]
     
-    def getBlockNumber(self, row, col):
+    def getBlockIndex(self, row: int, col: int) -> int:
+        """Returns the ID of the block, the specified cell is situated in. 
+        The blocks are numbered from 0 to 8 as follows:\n
+            0 1 2\n
+            3 4 5\n
+            6 7 8
+        """
         return (int(row/3)*3 + int(col//3))
 
-    def getBlock(self, block):
+    def getBlock(self, blockID: int) -> np.array:
         """Returns block section of the grid as numpy array. The blocks are numbered from 0 to 8 as follows:\n
             0 1 2\n
             3 4 5\n
             6 7 8
         """
-        if block < 0 or block > 8:
-            raise IndexError(f"Block number can only be between 0 and 8. Block number {block} was provided.")
-        x = block*3 % 9
+        if blockID < 0 or blockID > 8:
+            raise IndexError(f"Block number can only be between 0 and 8. Block number {blockID} was provided.")
+        x = blockID*3 % 9
         print(x)
-        y = int(block/3)*3
+        y = int(blockID/3)*3
         print(y)
         return self.grid[y:y+3,x:x+3]
     
-    def isEmpty(self):
+    def isEmpty(self) -> bool:
         return bool(np.count_nonzero(self.grid) == 0)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns Sudoku as formatted table. 0 and empty cells get represented as a dot."""
         n = self.grid.shape[0]  # 9
         box = 3

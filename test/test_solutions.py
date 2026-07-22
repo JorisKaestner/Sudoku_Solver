@@ -1,3 +1,4 @@
+# test cases for solutions produced by solving algorithms
 import pytest
 from sudoku.checker import check_state
 from sudoku.solver import solve_backtracking

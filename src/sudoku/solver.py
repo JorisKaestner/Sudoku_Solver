@@ -1,3 +1,4 @@
+# sudoku solving algorithms
 from sudoku.sudoku import Sudoku
 import copy
 

@@ -1,3 +1,4 @@
+# test cases for completely solved grids
 import pytest
 from sudoku.checker import check_state
 from dummy_sudokus import (

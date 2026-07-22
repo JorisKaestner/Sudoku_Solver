@@ -1,9 +1,11 @@
+# functions to verify sudoku solutions and unfinished states
 from sudoku.sudoku import Sudoku
 
-def check_placement(sdk: Sudoku, value: int, row: int, col: int):
-    """Checks if single value can be placed at specified location.
+def check_placement(sdk: Sudoku, value: int, row: int, col: int) -> bool:
+    """
+    Checks if single value can be placed at specified location.
     
-        TODO: optimize runtime
+    TODO: optimize runtime
     """
     if not (sdk.getGrid[row][col] == 0):
         return False
@@ -11,16 +13,19 @@ def check_placement(sdk: Sudoku, value: int, row: int, col: int):
         return False
     if value in sdk.getColumn(col):
         return False
-    if value in sdk.getBlock(sdk.getBlockNumber(row, col)):
+    if value in sdk.getBlock(sdk.getBlockIndex(row, col)):
         return False
     return True
 
-def check_state(sdk: Sudoku, final=False):
-    """Returns true, if there are no duplicate digits in rows, coloumns or blocks
+def check_state(sdk: Sudoku, final=False) -> bool:
+    """
+    Returns true, if there are no duplicate digits in rows, coloumns or blocks
     in the current sdk and false otherwise.
     Returns false, if the solution is final and has empty cells.
-    DOES NOT CHECK FOR SOLVABILITY."""
+    DOES NOT CHECK FOR SOLVABILITY.
+    """
 
+    # lists to remember seen digits in each row, coloumn and block
     rows = [[0] * 10 for _ in range(10)]
     cols = [[0] * 10 for _ in range(10)]
     blocks = [[0] * 10 for _ in range(10)]
@@ -54,7 +59,7 @@ def check_state(sdk: Sudoku, final=False):
                     return False
                 
                 # check blocks for duplicates
-                blockNumber = sdk.getBlockNumber(row, col)
+                blockNumber = sdk.getBlockIndex(row, col)
                 if blocks[blockNumber][digit] == 0:
                     blocks[blockNumber][digit] = 1
                 else:
