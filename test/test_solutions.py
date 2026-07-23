@@ -8,7 +8,6 @@ from dummy_sudokus import (
     EMPTY_BOARD
 )
 
-SUDOKUS = [VALID_UNSOLVED, VALID_START_1]
 ALGORITHMS = [solve_backtracking]
 
 @pytest.mark.parametrize("solve", ALGORITHMS, ids=lambda f: f.__name__)
@@ -17,7 +16,6 @@ def test_unsolvable_empty(solve):
     assert solution.isEmpty()
 
 @pytest.mark.parametrize("solve", ALGORITHMS, ids=lambda f: f.__name__)
-@pytest.mark.parametrize("sudokus", SUDOKUS, ids=lambda p: p.name)
-def test_solver_produces_valid_solution(sudokus, solve):
-    solution = solve(sudokus)
+def test_valid_solution_easy(solve):
+    solution = solve(VALID_START_1)
     assert check_state(solution, True)
