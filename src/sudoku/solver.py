@@ -1,16 +1,29 @@
 # sudoku solving algorithms
 from sudoku.sudoku import Sudoku
 from sudoku.checker import check_placement
+from sudoku.checker import check_state
 import copy
 
 def solve_backtracking(sdk: Sudoku) -> Sudoku:
+    """
+    Returns a solution to the provided Sudoku or returns the provided state,
+    when no solution was found, by applying a backtracking solving algorithm.
+    """
+    working_sudoku = copy.deepcopy(sdk) # return only copies
     if sdk.isEmpty():
         print("Sudoku is empty and cannot be solved.")
-        return Sudoku([[0] * 9 for _ in range(9)])
-    working_sudoku = copy.deepcopy(sdk)
-    solve_backtracking_rec(working_sudoku, 0, 0)
+        return working_sudoku
 
-    return working_sudoku
+    # provided state has errors
+    if not check_state(sdk, final=False):
+        return working_sudoku
+
+    # recursive call
+    if solve_backtracking_rec(working_sudoku, 0, 0):
+        return working_sudoku
+    else:
+        print("Now solution was found")
+        return copy.deepcopy(sdk)
 
 def solve_backtracking_rec(sdk, row, col):
     grid = sdk.getGrid()
