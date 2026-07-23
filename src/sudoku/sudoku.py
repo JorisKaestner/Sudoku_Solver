@@ -42,9 +42,7 @@ class Sudoku:
         if blockID < 0 or blockID > 8:
             raise IndexError(f"Block number can only be between 0 and 8. Block number {blockID} was provided.")
         x = blockID*3 % 9
-        print(x)
         y = int(blockID/3)*3
-        print(y)
         return self.grid[y:y+3,x:x+3]
     
     def isEmpty(self) -> bool:

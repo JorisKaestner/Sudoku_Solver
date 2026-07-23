@@ -7,7 +7,7 @@ def check_placement(sdk: Sudoku, value: int, row: int, col: int) -> bool:
     
     TODO: optimize runtime
     """
-    if not (sdk.getGrid[row][col] == 0):
+    if not (sdk.getGrid()[row][col] == 0):
         return False
     if value in sdk.getRow(row):
         return False
