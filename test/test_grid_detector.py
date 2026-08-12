@@ -21,7 +21,7 @@ def test_count_detected_squares(path):
 def test_count_detected_lines(path):
     sudoku = load_image(str(path))
     hor_lines, ver_lines = merge_nearest_lines(detect_lines(detect_edges(sudoku)))
-    assert len(hor_lines) == 8 and len(ver_lines) == 8
+    assert len(hor_lines) == 10 and len(ver_lines) == 10 # count top and bottom too
 
 @pytest.mark.parametrize("path", SUDOKU_PATHS, ids=lambda p: p.stem)
 def test_resize_cells(path):
