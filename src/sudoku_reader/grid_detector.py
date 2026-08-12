@@ -1,3 +1,4 @@
+# grid_detector.py
 # https://medium.com/@shiodev/analyzing-and-processing-grid-images-with-opencv-part-1-d5c42ab0703c
 import cv2
 import matplotlib.pyplot as plt
@@ -60,22 +61,17 @@ def count_unit_squares(horizontal_lines, vertical_lines):
     square_count = (len(horizontal_lines) - 1) * (len(vertical_lines) - 1)
     return square_count
 
-def extract_squares(image, horizontal_lines, vertical_lines):
+def extract_squares(image):
+    horizontal_lines, vertical_lines = merge_nearest_lines(detect_lines(detect_edges(image)))
     squares = []
+    padding = 3
     for i in range(len(horizontal_lines) - 1):
         for j in range(len(vertical_lines) - 1):
-            squares.append(image[horizontal_lines[i]:horizontal_lines[i+1], vertical_lines[j]:vertical_lines[j+1]])
+            squares.append(image[horizontal_lines[i]+padding:horizontal_lines[i+1]-padding, vertical_lines[j]+padding:vertical_lines[j+1]-padding])
     return squares
 
-"""
-# Load the image
-image_path = 'src/sudoku_reader/sample.png'
-image = load_image(image_path)
-edges = detect_edges(image)
-lines = detect_lines(edges)
-horizontal_lines, vertical_lines = merge_nearest_lines(lines)
-cropped = extract_squares(image, horizontal_lines, vertical_lines)
-
-display_image(cropped[3], "First")
-display_image(cropped[4], "Second")
-"""
+def resize_cells(cells, cell_size:int=28):
+    resized = []
+    for cell in cells:
+        resized.append(cv2.resize(cell, (cell_size, cell_size), interpolation=cv2.INTER_AREA))
+    return resized
