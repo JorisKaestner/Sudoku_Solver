@@ -10,5 +10,9 @@ dependencies = [
     "numpy",
 ]
 
+[project.optional-dependencies]
+dev = ["pytest"]
+ocr = ["opencv-python", "tensorflow"]
+
 [tool.setuptools.packages.find]
 where = ["src"]

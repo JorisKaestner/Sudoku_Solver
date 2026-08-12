@@ -3,7 +3,8 @@ import numpy as np
 from tensorflow import keras
 
 class DigitClassifier:
-    def __init__(self, model_path: str = "digit_model.keras"):
+    """Loads a Keras MNIST classifier model from path to predict digits"""
+    def __init__(self, model_path: str = "./digit_model.keras"):
         self.model = keras.models.load_model(model_path)
 
     def classify(self, cell: np.ndarray) -> int:
@@ -14,6 +15,7 @@ class DigitClassifier:
         return int(np.argmax(prediction))
 
 def train_classifier(save_model_path:str):
+    """Loads Tensorflow dataset and saves pre-trained model to path."""
     (x_train, y_train), _ = keras.datasets.mnist.load_data()
     x_train = x_train.astype("float32") / 255.0
 
