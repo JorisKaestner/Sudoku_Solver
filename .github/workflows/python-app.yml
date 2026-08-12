@@ -37,7 +37,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Install package
-      run: pip install -e .[dev,ocr]
+      run: pip install -e ".[dev,ocr]"
 
     - name: Install test dependencies
       run: pip install pytest
