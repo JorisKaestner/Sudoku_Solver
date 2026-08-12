@@ -28,8 +28,10 @@ def merge_nearest_lines(lines, threshold=50):
     horizontal_lines = []
     vertical_lines = []
 
+    lines = lines.reshape(-1, 4)  # normalize to (N, 4) for different opencv versions
+
     for line in lines:
-        x1, y1, x2, y2 = line[0]
+        x1, y1, x2, y2 = line
         if abs(y1 - y2) < 10:  # Horizontal line
             horizontal_lines.append(y1)
         elif abs(x1 - x2) < 10:  # Vertical line
