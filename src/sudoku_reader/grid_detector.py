@@ -4,27 +4,39 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-def load_image(image_path):
+def load_image(image_path:str) -> list[int]:
+    """Loads image from path and returns a grayscale image."""
     image = cv2.imread(image_path)
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     return gray_image
 
-def display_image(image, title):
+def display_image(image:np.array, title:str="Figure") -> None:
+    """Display image with matplotlib"""
     plt.figure(figsize=(8, 8))
     plt.title(title)
     plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     plt.axis('off')
     plt.show()
 
-def detect_edges(gray_image, threshold1=50, threshold2=150):
+def detect_edges(gray_image:np.array, threshold1:int=50, threshold2:int=150):
+    """Returns edges in image with canny edge detection.
+
+    :param int gray_image: matrix grayscale representation of image
+    :param int threshold1: Lower threshold value in Hysteresis Thresholding
+    :param int threshold2: Upper threshold value in Hysteresis Thresholding 
+    """
     edges = cv2.Canny(gray_image, threshold1, threshold2, apertureSize=3)
     return edges
 
-def detect_lines(edges, threshold=100, min_line_length=100, max_line_gap=10):
+def detect_lines(edges, threshold:int=100, min_line_length:int=100, max_line_gap:int=10):
+    """Detects lines from edges with Hough Line Transformation"""
     lines = cv2.HoughLinesP(edges, 1, np.pi / 180, threshold=threshold, minLineLength=min_line_length, maxLineGap=max_line_gap)
     return lines
 
 def merge_nearest_lines(lines, threshold=50):
+    """Merges nearest lines and separates by horizontal and vertical lines.
+       Returns tuple of horizontal_lines, vertical_lines.
+    """
     horizontal_lines = []
     vertical_lines = []
 
@@ -59,20 +71,23 @@ def merge_nearest_lines(lines, threshold=50):
 
     return merged_horizontal_lines, merged_vertical_lines
 
-def count_unit_squares(horizontal_lines, vertical_lines):
+def count_unit_squares(horizontal_lines:list, vertical_lines:list) -> int:
+    """Calculates squares by number of lines. Considers border lines."""
     square_count = (len(horizontal_lines) - 1) * (len(vertical_lines) - 1)
     return square_count
 
-def extract_squares(image):
+def extract_squares(image:np.array, padding:int=3) -> list[np.array]:
+    """Detects lines in image and slices it into squares. Returns extracted cells in a list."""
     horizontal_lines, vertical_lines = merge_nearest_lines(detect_lines(detect_edges(image)))
     squares = []
-    padding = 3
     for i in range(len(horizontal_lines) - 1):
         for j in range(len(vertical_lines) - 1):
             squares.append(image[horizontal_lines[i]+padding:horizontal_lines[i+1]-padding, vertical_lines[j]+padding:vertical_lines[j+1]-padding])
     return squares
 
-def resize_cells(cells, cell_size:int=28):
+def resize_cells(cells:np.array, cell_size:int=28) -> list[np.array]:
+    """Resizes all images in list to a fixed length and width and returns as new list.\n
+    Preprocessing and normalisation step for classification."""
     resized = []
     for cell in cells:
         resized.append(cv2.resize(cell, (cell_size, cell_size), interpolation=cv2.INTER_AREA))
