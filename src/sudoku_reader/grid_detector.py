@@ -87,11 +87,3 @@ def extract_squares(image:np.array, padding_percentage:float=0.1) -> list[np.arr
             squares.append(image[horizontal_lines[i]+row_padding:horizontal_lines[i+1]-row_padding, 
                                  vertical_lines[j]+col_padding:vertical_lines[j+1]-col_padding])
     return squares
-
-def resize_cells(cells:np.array, cell_size:int=28) -> list[np.array]:
-    """Resizes all images in list to a fixed length and width and returns as new list.\n
-    Preprocessing and normalisation step for classification."""
-    resized = []
-    for cell in cells:
-        resized.append(cv2.resize(cell, (cell_size, cell_size), interpolation=cv2.INTER_AREA))
-    return resized

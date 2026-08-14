@@ -1,6 +1,10 @@
 # cell_reader.py
 from sudoku_reader.digit_classifier import DigitClassifier
+from sudoku_reader.image_preprocessing import resize_cell
+from sudoku_reader.image_preprocessing import invert_cell
+from sudoku_reader.image_preprocessing import center_digit
 import numpy as np
+
 
 def is_empty_cell(cell: np.ndarray, threshold: float = 0.02) -> bool:
     """Returns true, if sum of dark pixels in image is below threshold percentage"""
@@ -12,5 +16,5 @@ def classify_cell(cell: np.ndarray, classifier: DigitClassifier = DigitClassifie
     """Returns digit predicted by classifier"""
     if (is_empty_cell(cell)):
         return 0
-    inverted = 255 - cell   # MNIST works with white on black digits
-    return classifier.classify(inverted)
+    prep_cell = center_digit(invert_cell(resize_cell(cell)))
+    return classifier.classify(prep_cell)
