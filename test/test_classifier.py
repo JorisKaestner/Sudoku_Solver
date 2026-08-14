@@ -71,5 +71,5 @@ def test_full_grids():
         predictions = []
         for cell in cells:
             predictions.append(classify_cell(cell))
-        assert predictions == solutions[i]
+        assert predictions == solutions[i-1]
 
