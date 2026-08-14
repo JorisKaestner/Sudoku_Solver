@@ -8,7 +8,7 @@ def is_empty_cell(cell: np.ndarray, threshold: float = 0.02) -> bool:
     dark_fraction = dark_pixels / cell.size
     return dark_fraction < threshold
 
-def classify_cell(cell: np.ndarray, classifier: DigitClassifier) -> int:
+def classify_cell(cell: np.ndarray, classifier: DigitClassifier = DigitClassifier()) -> int:
     """Returns digit predicted by classifier"""
     if (is_empty_cell(cell)):
         return 0

@@ -76,7 +76,7 @@ def count_unit_squares(horizontal_lines:list, vertical_lines:list) -> int:
     square_count = (len(horizontal_lines) - 1) * (len(vertical_lines) - 1)
     return square_count
 
-def extract_squares(image:np.array, padding:int=3) -> list[np.array]:
+def extract_squares(image:np.array, padding:int=10) -> list[np.array]:
     """Detects lines in image and slices it into squares. Returns extracted cells in a list."""
     horizontal_lines, vertical_lines = merge_nearest_lines(detect_lines(detect_edges(image)))
     squares = []

@@ -3,7 +3,7 @@ import pytest
 from sudoku_reader.grid_detector import load_image
 from sudoku_reader.grid_detector import extract_squares
 from sudoku_reader.grid_detector import resize_cells
-from sudoku_reader.digit_classifier import DigitClassifier
+from sudoku_reader.cell_reader import classify_cell
 
 solutions = [
 [8,0,0,0,3,2,0,0,0,
@@ -57,21 +57,19 @@ solutions = [
 0,5,1,0,0,0,0,0,0]]
 
 def test_check_empty():
-    classifier = DigitClassifier()
     img = load_image("test/sudoku_screenshots/sudoku_0.png")
     empty_cells = resize_cells(extract_squares(img))
     predictions = []
     for cell in empty_cells:
-        predictions.append(classifier.classify(cell))
+        predictions.append(classify_cell(cell))
     assert any(predictions) == False    # any() returns True for any value other than 0
 
 def test_full_grids():
-    classifier = DigitClassifier()
     for i in range(1,6):
         img = load_image(f"test/sudoku_screenshots/sudoku_{i}.png")
         cells = resize_cells(extract_squares(img))
         predictions = []
         for cell in cells:
-            predictions.append(classifier.classify(cell))
+            predictions.append(classify_cell(cell))
         assert predictions == solutions[i]
 
