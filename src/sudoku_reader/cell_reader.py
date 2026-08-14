@@ -12,4 +12,5 @@ def classify_cell(cell: np.ndarray, classifier: DigitClassifier = DigitClassifie
     """Returns digit predicted by classifier"""
     if (is_empty_cell(cell)):
         return 0
-    return classifier.classify(cell)
+    inverted = 255 - cell   # MNIST works with white on black digits
+    return classifier.classify(inverted)

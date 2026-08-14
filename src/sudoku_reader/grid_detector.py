@@ -76,13 +76,16 @@ def count_unit_squares(horizontal_lines:list, vertical_lines:list) -> int:
     square_count = (len(horizontal_lines) - 1) * (len(vertical_lines) - 1)
     return square_count
 
-def extract_squares(image:np.array, padding:int=10) -> list[np.array]:
+def extract_squares(image:np.array, padding_percentage:float=0.1) -> list[np.array]:
     """Detects lines in image and slices it into squares. Returns extracted cells in a list."""
     horizontal_lines, vertical_lines = merge_nearest_lines(detect_lines(detect_edges(image)))
     squares = []
     for i in range(len(horizontal_lines) - 1):
+        row_padding = int((horizontal_lines[i+1]-horizontal_lines[i])*padding_percentage)
         for j in range(len(vertical_lines) - 1):
-            squares.append(image[horizontal_lines[i]+padding:horizontal_lines[i+1]-padding, vertical_lines[j]+padding:vertical_lines[j+1]-padding])
+            col_padding = int((vertical_lines[j+1]-vertical_lines[j])*padding_percentage)
+            squares.append(image[horizontal_lines[i]+row_padding:horizontal_lines[i+1]-row_padding, 
+                                 vertical_lines[j]+col_padding:vertical_lines[j+1]-col_padding])
     return squares
 
 def resize_cells(cells:np.array, cell_size:int=28) -> list[np.array]:
