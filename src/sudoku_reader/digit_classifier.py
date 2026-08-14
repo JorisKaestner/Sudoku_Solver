@@ -4,7 +4,7 @@ from tensorflow import keras
 
 class DigitClassifier:
     """Loads a Keras MNIST classifier model from path to predict digits"""
-    def __init__(self, model_path: str = "./digit_model.keras"):
+    def __init__(self, model_path: str = "src/sudoku_reader/digit_model.keras"):
         self.model = keras.models.load_model(model_path)
 
     def classify(self, cell: np.ndarray) -> int:
