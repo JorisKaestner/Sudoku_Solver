@@ -24,3 +24,24 @@ def center_digit(cell: np.ndarray) -> np.ndarray:
     shift_x, shift_y = w // 2 - cx, h // 2 - cy
     M = np.float32([[1, 0, shift_x], [0, 1, shift_y]])
     return cv2.warpAffine(cell, M, (w, h))
+
+def crop_to_content(cell: np.ndarray, border_trim: int = 10) -> np.ndarray:
+    """Trim a fixed border margin first (removes thin grid-line fragments),
+    then tightly crop to the digit's actual bounding box."""
+    h, w = cell.shape
+    trimmed = cell[border_trim:h-border_trim, border_trim:w-border_trim]
+
+    _, thresh = cv2.threshold(trimmed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    coords = cv2.findNonZero(thresh)
+
+    if coords is None:
+        return trimmed  # empty cell, nothing to crop to
+
+    x, y, w2, h2 = cv2.boundingRect(coords)
+    return trimmed[y:y+h2, x:x+w2]
+
+def preprocess_cell(cell: np.array) -> np.array:
+    resized = resize_cell(cell)
+    centered = center_digit(resized)
+    inverted = invert_cell(centered)
+    return inverted

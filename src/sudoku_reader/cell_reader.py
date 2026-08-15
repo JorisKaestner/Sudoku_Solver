@@ -3,6 +3,7 @@ from sudoku_reader.digit_classifier import DigitClassifier
 from sudoku_reader.image_preprocessing import resize_cell
 from sudoku_reader.image_preprocessing import invert_cell
 from sudoku_reader.image_preprocessing import center_digit
+from sudoku_reader.image_preprocessing import preprocess_cell
 import numpy as np
 
 
@@ -16,5 +17,5 @@ def classify_cell(cell: np.ndarray, classifier: DigitClassifier = DigitClassifie
     """Returns digit predicted by classifier"""
     if (is_empty_cell(cell)):
         return 0
-    prep_cell = center_digit(invert_cell(resize_cell(cell)))
+    prep_cell = preprocess_cell(cell)
     return classifier.classify(prep_cell)
