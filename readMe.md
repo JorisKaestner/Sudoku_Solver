@@ -1,6 +1,8 @@
 # Sudoku Solver
 Command-line program to solve Sudoku puzzles and verify boards and solutions. Sudokus can be read from file or extracted from screenshots.
 
+!!! Reading puzzles from images is still inaccurate !!!
+
 ## Installation
 
     git clone https://github.com/JorisKaestner/Sudoku_Solver.git
