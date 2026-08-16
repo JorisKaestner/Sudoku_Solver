@@ -17,7 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest"]
-ocr = ["opencv-python==4.10.0.84", "tensorflow>=2.15,<3"]
+ocr = ["opencv-python==4.10.0.84", "tensorflow>=2.15,<3", "matplotlib"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
