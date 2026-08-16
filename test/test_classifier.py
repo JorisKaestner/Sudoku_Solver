@@ -2,7 +2,7 @@
 import pytest
 from sudoku_reader.grid_detector import load_image
 from sudoku_reader.grid_detector import extract_squares
-from sudoku_reader.cell_reader import classify_cell
+from sudoku_reader.reader import classify_cell
 
 sudokus = {
 "sudoku_1": [8,0,0,0,3,2,0,0,0,

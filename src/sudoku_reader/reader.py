@@ -1,11 +1,11 @@
 # cell_reader.py
 from sudoku_reader.digit_classifier import DigitClassifier
-from sudoku_reader.image_preprocessing import resize_cell
-from sudoku_reader.image_preprocessing import invert_cell
-from sudoku_reader.image_preprocessing import center_digit
 from sudoku_reader.image_preprocessing import preprocess_cell
+from sudoku_reader.grid_detector import load_image
+from sudoku_reader.grid_detector import extract_squares
+from pathlib import Path
+from sudoku.sudoku import Sudoku
 import numpy as np
-
 
 def is_empty_cell(cell: np.ndarray, threshold: float = 0.02) -> bool:
     """Returns true, if sum of dark pixels in image is below threshold percentage"""
@@ -19,3 +19,11 @@ def classify_cell(cell: np.ndarray, classifier: DigitClassifier = DigitClassifie
         return 0
     prep_cell = preprocess_cell(cell)
     return classifier.classify(prep_cell)
+
+def read_sudoku_from_image(image_path:Path) -> Sudoku:
+    image = load_image(image_path)
+    cells = extract_squares(image)
+    predictions = [classify_cell(cell) for cell in cells]
+    grid = np.reshape(predictions, (9, 9))
+    return Sudoku(grid)
+    
