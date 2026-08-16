@@ -5,6 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sudoku-solver"
 version = "0.1.0"
+description = "A Sudoku solver with an OCR pipeline for reading puzzles from images and verifying solutions."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Joris Kaestner" }]
 
 dependencies = [
     "numpy",
@@ -12,7 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest"]
-ocr = ["opencv-python", "tensorflow", "matplotlib"]
+ocr = ["opencv-python==4.10.0.84", "tensorflow>=2.15,<3"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
