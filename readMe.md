@@ -1,4 +1,4 @@
-  ![CI](https://github.com/JorisKaestner/Sudoku_Solver/actions/workflows/ci.yml/badge.svg)
+[![Python application](https://github.com/JorisKaestner/Sudoku_Solver/actions/workflows/python-app.yml/badge.svg)](https://github.com/JorisKaestner/Sudoku_Solver/actions/workflows/python-app.yml)
 # Sudoku Solver
 Command-line program to solve Sudoku puzzles and verify boards and solutions. Sudokus can be read from file or extracted from screenshots.
 
