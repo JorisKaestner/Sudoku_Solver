@@ -2,10 +2,9 @@
 import sys
 import argparse
 from pathlib import Path
-from sudoku_reader.reader import read_sudoku_from_image
-from sudoku_reader.reader import read_sudoku_from_txt
 from sudoku.checker import check_state
 from sudoku.solver import solve_backtracking
+from sudoku.io import read_sudoku_from_txt
 
 ALGORITHMS = {"backtracking"}
 
@@ -56,6 +55,7 @@ def main():
     if args.image and args.file:
         raise SystemExit("Provide either --image or --file, not both.")
     elif args.image:
+        from sudoku_reader.reader import read_sudoku_from_image # heavy load up
         sdk = read_sudoku_from_image(args.image)
     elif args.file:
         sdk = read_sudoku_from_txt(args.file)    
