@@ -40,8 +40,12 @@ def crop_to_content(cell: np.ndarray, border_trim: int = 10) -> np.ndarray:
     x, y, w2, h2 = cv2.boundingRect(coords)
     return trimmed[y:y+h2, x:x+w2]
 
+def binarize_and_invert(cell: np.ndarray) -> np.ndarray:
+    _, binary = cv2.threshold(cell, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    return binary
+
 def preprocess_cell(cell: np.array) -> np.array:
-    resized = resize_cell(cell)
-    centered = center_digit(resized)
-    inverted = invert_cell(centered)
-    return inverted
+    img_pipe = binarize_and_invert(cell)
+    img_pipe = resize_cell(img_pipe)
+    img_pipe = center_digit(img_pipe)
+    return img_pipe

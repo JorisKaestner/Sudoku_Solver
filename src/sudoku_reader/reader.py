@@ -14,7 +14,7 @@ def is_empty_cell(cell: np.ndarray, threshold: float = 0.02) -> bool:
 def classify_cell(cell: np.ndarray) -> int:
     """Returns digit predicted by classifier"""
     from sudoku_reader.digit_classifier import DigitClassifier
-    classifier = DigitClassifier()
+    classifier = DigitClassifier()  # adjust model path here
     if (is_empty_cell(cell)):
         return 0
     prep_cell = preprocess_cell(cell)

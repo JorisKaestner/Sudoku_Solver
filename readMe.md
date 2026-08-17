@@ -1,7 +1,6 @@
+  ![CI](https://github.com/JorisKaestner/Sudoku_Solver/actions/workflows/ci.yml/badge.svg)
 # Sudoku Solver
 Command-line program to solve Sudoku puzzles and verify boards and solutions. Sudokus can be read from file or extracted from screenshots.
-
-!!! Reading puzzles from images is still inaccurate !!!
 
 ## Installation
 
@@ -10,9 +9,6 @@ Command-line program to solve Sudoku puzzles and verify boards and solutions. Su
     pip install -e ".[dev,ocr]"
 
 Requires Python 3.10+
-
-## Prerequisites for OCR features
-Pre-trained model can be found at src/sudoku_reader/digit_model.keras. To recreate the model use the   `train_classifier()` method at src/sudoku_reader/digit_classifier.py.
 
 ## Usage
 ### Verify the current state of a Sudoku puzzle
@@ -40,6 +36,11 @@ by file:
     ALGORITHM: backtracking (default) 
 
 Backtracking is the only solving algorithm yet. 
+
+## Prerequisites for OCR features
+Pre-trained model can be found at src/sudoku_reader/models. To recreate the models run `python src/sudoku_reader/model_trainer.py`. To load your own model, you have to add your model path in the source code at `src/sudoku_reader/reader.py` for now.
+
+Model accuracy is at >95% per cell. Reading whole puzzles is not reliable, so check the detected input visually.
 
 ## Input constraints
 Images should be screenshots of Sudokus with the outer borders visible and no extra objects or lines in the image.
