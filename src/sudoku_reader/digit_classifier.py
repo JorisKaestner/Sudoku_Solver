@@ -1,5 +1,8 @@
 # digit_classifier.py
+import os
 import numpy as np
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
+os.environ.setdefault("TF_ENABLE_ONEDNN_OPTS", "0")
 from tensorflow import keras
 
 class DigitClassifier:

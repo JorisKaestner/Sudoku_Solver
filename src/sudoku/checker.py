@@ -71,8 +71,6 @@ def check_state(sdk: Sudoku, final=False) -> bool:
                 print(f"Invalid digit {grid[row][col]} at {row},{col}")
                 return False
     if final:
-        print("Solution was verified.")
         return True
     else:
-        print("Current state is valid.")
         return True

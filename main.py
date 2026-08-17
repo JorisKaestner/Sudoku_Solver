@@ -55,6 +55,7 @@ def main():
     if args.image and args.file:
         raise SystemExit("Provide either --image or --file, not both.")
     elif args.image:
+        print("Loading model...")
         from sudoku_reader.reader import read_sudoku_from_image # heavy load up
         sdk = read_sudoku_from_image(args.image)
     elif args.file:

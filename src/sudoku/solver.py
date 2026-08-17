@@ -11,7 +11,7 @@ def solve_backtracking(sdk: Sudoku) -> Sudoku:
     """
     working_sudoku = copy.deepcopy(sdk) # return only copies
     if sdk.isEmpty():
-        print("Sudoku is empty and cannot be solved.")
+        print("Sudoku is empty.")
         return working_sudoku
 
     # provided state has errors
@@ -22,8 +22,7 @@ def solve_backtracking(sdk: Sudoku) -> Sudoku:
     if solve_backtracking_rec(working_sudoku, 0, 0):
         return working_sudoku
     else:
-        print("Now solution was found")
-        return copy.deepcopy(sdk)
+        return copy.deepcopy(sdk)   # no solution found
 
 def solve_backtracking_rec(sdk, row, col):
     grid = sdk.getGrid()
