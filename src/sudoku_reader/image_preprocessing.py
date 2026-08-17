@@ -45,7 +45,7 @@ def binarize_and_invert(cell: np.ndarray) -> np.ndarray:
     return binary
 
 def preprocess_cell(cell: np.array) -> np.array:
-    img_pipe = resize_cell(cell)
-    #img_pipe = center_digit(img_pipe)
-    img_pipe = binarize_and_invert(img_pipe)
+    img_pipe = binarize_and_invert(cell)
+    img_pipe = resize_cell(img_pipe)
+    img_pipe = center_digit(img_pipe)
     return img_pipe
